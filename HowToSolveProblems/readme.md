@@ -158,3 +158,37 @@ containsCommonItem2(array1, array2);
 
 **Step 11: Think about error checks and how you can break this code. Never make assumptions about the input. Assume people are trying to break your code and that Darth Vader is using your function. How will you safeguard it? Always check for false inputs that you don’t want. Here is a trick: Comment in the code, the checks that you want to do... write the function, then tell the interviewer that you would write tests now to make your function fail (but you won't need to actually write the tests).**
 
+=> Try to break your code by feeding random inputs like  
+const array1 = ['a', null, 'c', 'x'];  
+const array2 = ['z', null', 'w'];
+
+We wanna tell the interview how we might be able to break this code. What if function is called with just one array? We get an error. We wanna start thinking about how errors might arise. We wanna make function as error free as possible. In interview there might not be time to write tests but we wanna tell the interviewer how the code might break.
+
+**Step 12: Don't use bad/confusing names like i and j. Write code that reads well.**
+
+=> For loops, its okay to write i and j. But for parameters names, variables write meaningful names. 
+
+
+**Step 13: Test you code. Check for no params, 0, undefined, null, massive arrays, async code, etc... Ask the interviewer if we can make assumption about the code. Can you make the answer return an error? Poke holes into your solution. Are you repeating yourself?**
+
+=> Let interviewer know that you are making assumptions and you are thinking about them. You wanna test your code.
+
+**Step 14: Finally talk to the interviewer where you would imporve the code. Does it work? Are there different approaches? Is it readable? What would you google to improve? How can performance be improved? Possibly: Ask the interviewer what was the most interesting solution you have seen to this problem.**
+
+=> Looking at the above code, we can tell the interviewer that the downside to the above solution is that only numbers, strings, booleans can be used correctly because we are using map object and in javascript, object might not work with non literal values. We might also argue that the above solution code could be more readable. We can tell interviewer that we can make the above code more readable in javascript as follows:
+
+```js
+function containsCommonItem3(arr1, arr2) {
+  return arr1.some(item => arr2.includes(item));
+}
+```
+
+=>  We are using javascript buildin methods. We are checking the first array, iterating through each item in the first array and if some of them include the item in arr2, just return true or false.
+
+**Step 15: If your interviewer is happy with the solution, the interview usually ends here. It is also common that the interviewer ask you extension questions, such as how you would handle the problem if the whole input is too large to fit into memory, or if the input arrives as a stream. This is a common follow-up question at Google, where they care a lot about scale. The answer is usually a divide-and-conquer approach - perform distributed processing of the data and only read certain chunks of the input from disk into memory, write the output back to disk and combine them later.**
+
+=> Lets talk about space complexity here. The space complexity of solution 1 [O(n^2)] is O(1) because we are not creating new variables, we are just using the input arrays. But in solution 2, we are creating a new object, and we are adding the first array into that object which takes up memory. So, this solution take space complexity of O(a) where a is first array. So, we can tell interviewer, even if solution 2 is faster in terms of time complexity, it is more heavy in terms of space complexity.
+
+**Step 9: Modularize your code from the very beginning. Break up your code into beautiful small pieces and add just comments if you need to.**
+
+=> Companies want individual who write clean, modularize code, because it is not only you who works in a codebase. You wanna write a code than it understandable by everyone in the team and easy to pick up with. For the above solution 2, you might wanna break the loops into their own function. We wanna build small pieces of code that do one thing and one thing very well. And, this create clean testable modular code.
