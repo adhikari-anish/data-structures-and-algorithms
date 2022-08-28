@@ -53,7 +53,7 @@ we are adding 'alien' item at index 2, and shifting the elements after index 2 b
 
 ---
 
-## Static vs Dynamic Arrays
+# Static vs Dynamic Arrays
 
 One limitation of static arrays are they are fixed in size, meaning we need to specify the number of elements in an array (length) ahead of time.
 
@@ -67,5 +67,80 @@ In case of static arrays, if we need to insert an element and there is no enough
 
 ---
 
+# Implementing An Array
 
+Even though array is already builtin in javascript and other languages, we can build it on our own. We can create our own data structure even if there are builtin. Most common data structures are already implemented in most of the languages because they are so useful but we are able to build any data structures from scratch and most data structures are build on top of other data structures. 
 
+Arrays in JS are just objects with integer based keys that act like indices.
+ 
+ We can implement array as follows:
+
+ ```js
+ class MyArray {
+    constructor() {
+        this.length =  0;
+        this.data = {};
+    }
+    
+    get(index) { // O(1)
+        return this.data[index];
+    }
+    
+    push(item) {  // O(1)
+        this.data[this.length] = item;
+        this.length++;
+        return this.length;
+    }
+    
+    pop() {  // O(1)
+        const lastItem = this.data[this.length - 1];
+        delete this.data[this.length - 1];
+        this.length--;
+        return lastItem;
+    }
+    
+    delete(index) {  // O(n)
+        const item = this.data[index];
+        this.shiftItems(index);
+        return item;
+    }
+    
+    shiftItems(index) {
+        for (let i = index; i < this.length - 1; i++) {
+            this.data[i] = this.data[i+1];
+        }
+        delete this.data[this.length - 1]
+        this.length--;
+    }
+}
+
+const newArray = new MyArray();
+newArray.push('hi');
+newArray.push('you');
+newArray.push('!');
+
+// newArray.pop();
+// newArray.pop();
+// newArray.pop();
+
+newArray.delete(0)
+newArray.push('are');
+newArray.push('nice');
+newArray.delete(1);
+console.log(newArray);
+```
+
+<u>*Trick:*</u>  
+If there is a question related to string, turn it into an array first, perform operation and turn it back into string after the operation is completed.
+
+## Arrays when to use and when not to
+
+Props (When to):
+* Fast lookups - i.e. accessing information when you know which index you wanna lookup
+* Fast push/pop - adding items at the end of an array and taking things out from the end of an array
+* Ordered - having something in order and close to each other in memory makes it really fast
+
+Cons (When not to):
+* Slow inserts - because we have to shift array whenever its not at the end of an array.
+* Slow deletes - because we have to shift array whenever its not at the end of an array.
+* Fixed size (if using static array)
