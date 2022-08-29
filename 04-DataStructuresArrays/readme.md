@@ -53,7 +53,7 @@ we are adding 'alien' item at index 2, and shifting the elements after index 2 b
 
 ---
 
-# Static vs Dynamic Arrays
+## Static vs Dynamic Arrays
 
 One limitation of static arrays are they are fixed in size, meaning we need to specify the number of elements in an array (length) ahead of time.
 
@@ -67,7 +67,7 @@ In case of static arrays, if we need to insert an element and there is no enough
 
 ---
 
-# Implementing An Array
+## Implementing An Array
 
 Even though array is already builtin in javascript and other languages, we can build it on our own. We can create our own data structure even if there are builtin. Most common data structures are already implemented in most of the languages because they are so useful but we are able to build any data structures from scratch and most data structures are build on top of other data structures. 
 
