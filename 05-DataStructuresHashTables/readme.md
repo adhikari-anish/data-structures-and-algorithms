@@ -131,3 +131,65 @@ myHashTable.get('grapes');
 ```
 
 The downside of array is that while getting keys, we have to loop over all the memory space even if there is only few data. In the above case we have only 3 data in our hashtable i.e. grapes, apples and oranges, but we had to loop over all 50 shelves/memory spaces to find just 3 keys. With arrays we had to loop only 3 times, because there would have been only 3 data in the array and no other memory spaces.
+
+---
+
+## Exercise First Recurring Character
+
+Given an array = [2,5,1,2,3,5,1,2,4]  
+It should return 2
+
+Given an array = [2,1,1,2,3,5,1,2,4]  
+It should return 1
+
+Given an array = [2,3,4,5]  
+It should return undefined 
+
+```js
+let arr = [2, 1, 1, 2, 3, 5, 1, 2, 4]
+
+function firstRecurringCharacter(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i + 1; j < arr.length; j++) {
+      if (arr[i] === arr[j]) {
+        console.log(arr[i])
+        return arr[i]
+      }
+    }
+  }
+  return undefined;
+} // O(n^2)
+
+
+function firstRecurringCharacter2(arr) {
+  let map = {};
+
+  for (let i = 0; i < arr.length; i++) {
+    if (map[arr[i]]) {
+      return arr[i];
+    } else {
+      map[arr[i]] = true;
+    }
+  }
+  return undefined;
+} // O(n)
+
+console.log(firstRecurringCharacter2([2, 5, 1, 2, 3, 5, 1, 2, 4]));
+```
+
+In the second function, we made the time complexity O(n) but we increased the memory/ the space complexity by O(n) because we are creating a new object that needs to keep track of all the items in the array, and in the worst case it goes through all the items in the array and hold that information in the map. Unlike, in the first function, we didn't create any space complexity, we had space complexity of O(1).
+
+---
+
+## Review
+
+Pros:
+* Fast lookups (Good collision resolution needed)
+* Fast inserts
+* Flexible keys
+
+Cons: 
+* Unordered
+* Slow key iteration
+
+Hash tables in interviews are useful for improving time complexity especially of nested loops, the tradeoff being more memory O(n).
